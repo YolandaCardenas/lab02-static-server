@@ -1,30 +1,38 @@
-//http
+// http
 var http = require("http");
-//obteniendo informacion del entorno
-// de ejecucion con respecto al Ip
-//y el puerto que devemos de usar en
+var fs = require('fs');
+//Obteniendo informacion del entorno
+//De ejecucion con respecto al Ip
+//y al puerto que debemos usar en 
 //nuestro server
 var PORT = process.env.PORT;
 var IP = process.env.IP || `127.0.0.1`;
-if(IP==`127.0.0.1`){
+if(IP=='127.0.0.1'){
     console.log("> ---- EJECUTANDO EN MODO LOCAL ----");
 }
 
-//crear un servidor basico
-var server = http.createServer(function(req,res){
-    //Armar la respuesta http
-    //Armar un encabezado http
-    res.writeHead(200, {
+// Crear un servidor basico
+var server = http.createServer(function(req, res){
+    // Armar la respuesta http
+    // Armar un encabezado http
+    res.writeHead(200,{
         "Content-Type" : "text/html",
-        "Server" : "ITGAM@4.2.4"
+        "Server" : "ITGAM4.2.4"
     });
-    // Enviamos la respuesta
-    res.write("<h1>Yolanda Moreno server</h1>");
-    //cerrar conexion
-    res.end();
-});
-//poner atrabajar el server
-server.listen(PORT,IP,function(){
-  console.log(`> Server listening @http://${IP}:${PORT} ...`);
 
+    // lectura del archivo a servir
+    fs.readFile(`./static/index.html/`,
+    `utf8`,function(err, content){
+        if(err){
+            res.write("<h1>ERROR DE LECTURA</h1>");
+            
+        }else{
+            res.end(content);
+            
+        }
+    });    
+});
+// Poner a trabajar al server
+server.listen(PORT,IP,function(){
+    console.log(`> Server listening @http://${IP}:${PORT} ...`);
 });
