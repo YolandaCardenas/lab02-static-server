@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/YolandaCardenas/lab02-static-server/issues"
   },
-  "homepage": "https://github.com/YolandaCardenas/lab02-static-server#readme"
+  "homepage": "https://github.com/YolandaCardenas/lab02-static-server#readme",
+  "dependencies": {
+    "color": "^0.11.3"
+  }
 }

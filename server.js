@@ -1,38 +1,49 @@
-// http
-var http = require("http");
-var fs = require('fs');
-//Obteniendo informacion del entorno
-//De ejecucion con respecto al Ip
-//y al puerto que debemos usar en 
-//nuestro server
-var PORT = process.env.PORT;
-var IP = process.env.IP || `127.0.0.1`;
-if(IP=='127.0.0.1'){
-    console.log("> ---- EJECUTANDO EN MODO LOCAL ----");
+//http
+var http = require("http"),
+fs = require('fs'),
+config = require("./config/config.js"),
+staticServer = require ('./internals/static-server'),
+config = require('color'),
+handler = require ('./internals/handlers');
+
+//obteniendo las configuraciones
+// del modulo de configuraciones
+var PORT = config.PORT;
+var IP = config.IP;
+if(IP=='127.0.0.1');{
+    console.log("-------ejecutando en modo local-----");
 }
 
-// Crear un servidor basico
-var server = http.createServer(function(req, res){
-    // Armar la respuesta http
-    // Armar un encabezado http
-    res.writeHead(200,{
-        "Content-Type" : "text/html",
-        "Server" : "ITGAM4.2.4"
-    });
+var server = http.createServer(function (req,res){
+//obtener la url del archivo 
+var url = req.url;
+if(url =="/"){
+    //sirve el index.html
+    url = "/index.html";
+}
+     
+    //verificando que la particion
+    //del cliente sea una ruta
+    //virtual
+   if(typeof(handlers[url]) ==='funtion'){
+    // sie entro aqui,significa que
+   //existe un manejador para url
+    //que se esta solicitando por lo tanto
+    //lo ejecuto
+    handlers[url](req,res)
 
-    // lectura del archivo a servir
-    fs.readFile(`./static/index.html/`,
-    `utf8`,function(err, content){
-        if(err){
-            res.write("<h1>ERROR DE LECTURA</h1>");
-            
-        }else{
-            res.end(content);
-            
-        }
-    });    
+
+}else{
+       console.log('>URL solicitando: ${url} ...'.yellow);
+//sirvo la url con i server estatico 
+staticServer.server(url, res);
+    
+}
+   
+    }
+ 
 });
-// Poner a trabajar al server
-server.listen(PORT,IP,function(){
-    console.log(`> Server listening @http://${IP}:${PORT} ...`);
+//poner a trabajar al a servidor 
+server.listen(PORT,IP,function () {
+    console.log(`> Server listening http://${IP}:${PORT}...`);
 });

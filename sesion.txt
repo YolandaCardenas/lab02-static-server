@@ -1,7 +1,7 @@
 console.log("hola")
-var edad = 12
+var edad = 29
 edad
-var nombre = "Luis Angel Cruz Benitez"
+var nombre = "yolanda moreno cardenas"
 nombre
 nombre.length
 typeof(nombre)
@@ -9,18 +9,18 @@ typeof(edad)
 var persona = {}
 typeof(persona)
 persona = {
-"nombre": "Luis",
+"nombre": "yolanda",
 
-"apellido": "Cruz",
-email: "luis.cruzbenitez@gmail.com",
+"apellido": "Moreno",
+email: "yolandamoreno1243@gmail.com",
 "imprimeNombreCompleto":function(){
 var fullName = ´${this.nombre} ${this.apellido}´;
 console.log(fullName);
 }
 persona = {
-"nombre": "Luis",
-"apellido": "Cruz",
-email: "luis.cruzbenitez@gmail.com",
+"nombre": "yolanda",
+"apellido": "moreno",
+email: "yolandamoreno1243@gmail.com",
 "imprimeNombreCompleto":function(){
   var fullName = `${this.nombre} ${this.apellido}`;
   console.log(fullName);
