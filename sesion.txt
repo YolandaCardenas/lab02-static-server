@@ -1,0 +1,32 @@
+console.log("hola")
+var edad = 12
+edad
+var nombre = "Luis Angel Cruz Benitez"
+nombre
+nombre.length
+typeof(nombre)
+typeof(edad)
+var persona = {}
+typeof(persona)
+persona = {
+"nombre": "Luis",
+
+"apellido": "Cruz",
+email: "luis.cruzbenitez@gmail.com",
+"imprimeNombreCompleto":function(){
+var fullName = ´${this.nombre} ${this.apellido}´;
+console.log(fullName);
+}
+persona = {
+"nombre": "Luis",
+"apellido": "Cruz",
+email: "luis.cruzbenitez@gmail.com",
+"imprimeNombreCompleto":function(){
+  var fullName = `${this.nombre} ${this.apellido}`;
+  console.log(fullName);
+  }
+};
+persona.nombre
+persona.apellido
+persona.email
+persona.imprimeNombreCompleto()
